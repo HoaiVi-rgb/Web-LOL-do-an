@@ -61,11 +61,15 @@
 
         /* --- Styling cho Header --- */
         .main-header {
-            background-color: #111;
-            border-bottom: 1px solid #222;
-            padding: 0 20px;
-            position: relative;
-            z-index: 1000;
+        background-color: #111;
+        border-bottom: 1px solid #222;
+        padding: 0 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        box-sizing: border-box;
         }
 
         .main-nav {
@@ -2317,7 +2321,7 @@
 
     /* --- Skins Section --- */
     .skins-section {
-        padding: 5% 20px 75%; /* Tăng padding trên để tránh ảnh skin bị che khuất */
+        padding: 5% 0px 50%; /* Tăng padding trên để tránh ảnh skin bị che khuất */
     }
 
     .skins-container {
