@@ -27,6 +27,28 @@
                 if (event.target === riotMegaMenu) {
                     closeMegaMenu();
                 }
+            // --- LOGIC ACCORDION CHO RIOT MENU TRÊN MOBILE ---
+    
+    // Lấy tất cả tiêu đề nhóm (Trò chơi, Esports...)
+    const menuTitles = document.querySelectorAll('.menu-category-title');
+
+    menuTitles.forEach(title => {
+        title.addEventListener('click', function() {
+            // Chỉ chạy logic này trên màn hình nhỏ (Mobile/Tablet)
+            if (window.innerWidth <= 1024) {
+                // 1. Tìm danh sách ul ngay phía sau tiêu đề
+                const list = this.nextElementSibling;
+                
+                // 2. Toggle class 'active' cho tiêu đề (để xoay mũi tên)
+                this.classList.toggle('active');
+
+                // 3. Toggle class 'active' cho danh sách (để hiện/ẩn)
+                if (list) {
+                    list.classList.toggle('active');
+                }
+            }
+        });
+    });
             });
 
     const promoData = {

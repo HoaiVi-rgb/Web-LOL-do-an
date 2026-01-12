@@ -269,13 +269,6 @@
     gap: 24px;
 }
 
-/* Responsive: Trên mobile chuyển thành 1 cột */
-@media (max-width: 768px) {
-    .news-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* News Card Styles */
 .news-card {
     display: flex;
@@ -639,45 +632,6 @@
     letter-spacing: 1px;
 }
 
-/* --- RESPONSIVE: CHO ĐIỆN THOẠI --- */
-@media (max-width: 900px) {
-    .champion-container {
-        grid-template-columns: 1fr; /* Chuyển về 1 cột */
-        text-align: center;
-        padding-top: 20px;
-    }
-
-    .champion-content {
-        padding-right: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .desc {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .role-selector {
-        justify-content: center;
-        margin-bottom: 40px;
-    }
-    
-    .champion-visual {
-        min-height: 400px;
-    }
-    
-    /* Thu nhỏ vòng tròn trên mobile */
-    .visual-inner {
-        width: 320px;
-        height: 320px;
-    }
-
-    .champion-name-tag {
-        right: 0; /* Căn lại tên tướng */
-    }
-}
 .read-more {
     margin-top: auto; /* Đẩy chữ Read more xuống đáy card */
     font-size: 12px;
@@ -961,7 +915,7 @@
     color: #f5f2f2;
     line-height: 1.6;
     margin-bottom: 40px;
-    max-width: 900px;
+    max-width: 600px;
     text-align: left;
 }
 
@@ -969,35 +923,6 @@
     box-shadow: 0 4px 15px rgba(194, 143, 44, 0.3);
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 900px) {
-    .skins-container {
-        grid-template-columns: 1fr; /* 1 Cột */
-        text-align: center;
-        gap: 50px;
-    }
-
-    .skins-content {
-        padding-left: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        order: 2; /* Đẩy chữ xuống dưới */
-    }
-    
-    .skins-visual {
-        order: 1; /* Đẩy ảnh lên trên */
-    }
-
-    .visual-inner-diamond {
-        width: 300px;
-        height: 300px;
-    }
-
-    .skins-content .main-title {
-        font-size: 50px;
-    }
-}
 
 /* =========================================
    GAME MODES SECTION STYLING
@@ -1177,26 +1102,7 @@
     line-height: 1.5;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-    .gamemodes-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 50px;
-    }
 
-    .gamemodes-content {
-        padding-right: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .video-circle-wrapper {
-        width: 300px;
-        height: 300px;
-    }
-}
 /* =========================================
    FINAL CTA SECTION STYLING
    ========================================= */
@@ -1294,7 +1200,7 @@
 .riot-mega-menu-overlay.active .riot-menu-backdrop {
     opacity: 1;
 }
-
+/* --------------MENU GAME------------------------- */
 /* Container Menu Màu Trắng */
 .riot-mega-menu-container {
     background-color: #fff;
@@ -1739,7 +1645,10 @@
             text-align: left;
             line-height: 1.5;
         }   
-
+/* --- CSS CHO ẢNH TRONG MENU (Mặc định ẩn trên Desktop) --- */
+.mobile-game-img {
+    display: none;
+}
 
     
 /* --- RIOT MOBILE MENU STYLING --- */
@@ -1986,7 +1895,131 @@
     .primary-nav-links {
         display: none !important; 
     }
-    
+    /* =========================================
+   RIOT MEGA MENU RESPONSIVE (TABLET & MOBILE)
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+    /* 1. Container: Full màn hình, cho phép cuộn */
+    .riot-mega-menu-container {
+        height: 100vh; /* Chiếm hết chiều cao */
+        padding: 20px;
+        overflow-y: auto; /* Cuộn dọc */
+        display: flex;
+        flex-direction: column;
+        transform: none; /* Reset transform nếu cần */
+        border-top: none; /* Bỏ viền đỏ nếu muốn giống ảnh mobile */
+    }
+
+    /* 2. Body: Xếp dọc thành 1 cột */
+    .riot-menu-body {
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        gap: 20px;
+        padding-bottom: 40px; /* Khoảng trống dưới cùng */
+    }
+
+    /* 3. Left Panel (Danh sách link) */
+    .menu-left-panel {
+        width: 100%;
+        columns: 1; /* Bỏ chia cột dạng báo */
+    }
+
+    .menu-group {
+        margin-bottom: 10px;
+        background-color: #f9f9f9; /* Nền xám nhạt cho từng khối */
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    /* Tiêu đề nhóm (Accordion Header) */
+    .menu-category-title {
+        background-color: #f0f0f0;
+        width: 100%;
+        margin: 0;
+        padding: 15px 20px;
+        font-size: 14px;
+        color: #111;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer; /* Con trỏ tay để biết là bấm được */
+        border-radius: 8px; /* Bo góc */
+    }
+
+    /* Tạo mũi tên giả bằng CSS cho Accordion */
+    .menu-category-title::after {
+        content: '▼'; /* Hoặc dùng icon SVG nếu muốn đẹp hơn */
+        font-size: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    /* Khi class 'active' được thêm vào (mở menu) */
+    .menu-category-title.active::after {
+        transform: rotate(180deg);
+    }
+
+    /* Danh sách link con (Mặc định ẩn) */
+    .menu-list {
+        display: none; /* Ẩn đi */
+        padding: 10px 0;
+        background-color: #fff;
+    }
+
+    .menu-list.active {
+        display: block; /* Hiện khi có class active */
+    }
+
+    .menu-list li a {
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #555;
+        border-bottom: 1px solid #eee;
+    }
+
+    .menu-list li:last-child a {
+        border-bottom: none;
+    }
+
+    /* 4. Right Panel (Ảnh quảng cáo) */
+    .menu-right-panel {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+
+    /* Ẩn khối hover (chỉ dùng cho PC) */
+    .promo-hover-view {
+        display: none !important;
+    }
+
+    /* Hiện khối mặc định (2 ảnh) & Xếp dọc */
+    .promo-default-view {
+        display: flex !important;
+        flex-direction: column; /* Xếp chồng lên nhau */
+        gap: 20px;
+        max-width: 100%;
+    }
+
+    .promo-card-small {
+        width: 100%;
+    }
+
+    .promo-card-small .img-wrapper {
+        max-width: 100%; /* Ảnh full chiều ngang */
+        height: auto;
+        aspect-ratio: 16/9; /* Giữ tỉ lệ đẹp */
+    }
+
+    .promo-card-small p {
+        font-size: 14px;
+        margin-top: 10px;
+        font-weight: 600;
+    }
+}
     /* Ẩn thanh search và các nút icon để gọn gàng */
     .search-input, 
     .icon-buttons,
@@ -2029,28 +2062,108 @@
 
     .champion-visual {
         order: 2; /* Ảnh xuống sau */
-        min-height: 400px;
+        min-height: 500px;
+        margin-top: 50px;
+
     }
-    
+    .circle-decoration {
+        display: none; /* Ẩn các vòng tròn trang trí */
+    }
     .visual-inner {
         width: 100%;
-        height: auto;
+        height: 80%;
     }
 
     .champion-img {
         /* Reset vị trí ảnh tướng để không bị lệch */
-        top: 50%;
-        left: 50%;
+        bottom: 30%;
+        left: 25%;
         transform: translate(-50%, -50%);
         height: auto;
         width: 80%;
         max-width: 400px;
+
+    }
+    /* Skins: Chỉnh ảnh skin và chữ */
+    .skins-container {
+    flex-direction: column;
+        gap: 32px;
+    }
+    .skins-visual {
+        order: 1;  
+    }
+
+    .skin-img {
+        min-width: 100%;
+        left: 50%; /* Căn giữa lại ảnh skin */
+    }
+    .skins-content {
+        order: 0;
+        padding-left: 0;
+        text-align: center;
+        align-items: center;
     }
 
     .champion-name-tag {
         right: 0;
         left: 0;
         bottom: -10%;
+    }
+    /* --- SKINS SECTION FIX (TABLET) --- */
+    .skins-container {
+        display: flex;          /* QUAN TRỌNG: Ghi đè Grid thành Flexbox */
+        flex-direction: column; /* Xếp dọc: Trên xuống dưới */
+        align-items: center;    /* Căn giữa trục ngang */
+        text-align: center;     /* Căn giữa văn bản */
+        gap: 50px;              /* Khoảng cách giữa Ảnh và Chữ */
+        height: auto;           /* Bỏ chiều cao cố định nếu có */
+        padding-bottom: 50px;
+    }
+
+    /* Phần Ảnh (Visual) */
+    .skins-visual {
+        order: 1;        /* Đưa ảnh lên đầu */
+        width: 40%;     /* Chiếm full chiều rộng */
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Chỉnh lại khung hình thoi và ảnh cho vừa mắt hơn trên Tablet */
+    .visual-inner-diamond {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .skin-img {
+        /* Căn chỉnh lại vị trí ảnh skin trong khung */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1.1);
+        width: 120%;
+    }
+
+    /* Phần Nội dung (Content) */
+    .skins-content {
+        order: 0;           /* Đưa chữ lên trên */
+        padding-left: 0;    /* Xóa padding bên trái của bản Desktop */
+        width: 80%;         /* Giới hạn chiều rộng để chữ không bị dài quá */
+        
+        /* Căn giữa các thành phần con (Tiêu đề, nút bấm) */
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    }
+
+    /* Đảm bảo text căn giữa */
+    .skins-content .sub-title,
+    .skins-content .main-title,
+    .skins-content .desc {
+        text-align: center;
+        width: 100%;
+    }
+
+    .skins-content .main-title {
+        font-size: 56px; /* Giảm nhẹ cỡ chữ tiêu đề */
     }
 
     /* Game Modes: Thu nhỏ vòng tròn video */
@@ -2059,6 +2172,10 @@
         height: 400px;
         left: 0; /* Bỏ lệch trái */
     }
+    .mode-description {
+        left: 0; /* Bỏ lệch trái */
+        
+    }
     .hamburger-btn {
         display: block; /* Hiện nút 3 gạch */
     }
@@ -2066,6 +2183,7 @@
     .primary-nav-links {
         display: none; /* Ẩn menu ngang cũ */
     }
+    
 }
 
 /* --- 2. MOBILE (Điện thoại) --- 
@@ -2157,9 +2275,13 @@
         gap: 16px;
         justify-content: center;
         flex-wrap: wrap; /* Cho phép icon xuống dòng nếu quá chật */
-        padding: 0% 15% 0% 15%;
+        padding: 0% 10% 0% 10%;
     }
-    
+
+    .circle-decoration {
+        display: none; /* Ẩn các vòng tròn trang trí */
+    }
+
     .role-icon {
         width: auto;
         height: auto;
@@ -2195,33 +2317,34 @@
 
     /* --- Skins Section --- */
     .skins-section {
-        padding: 25% 20px 50%; /* Tăng padding trên để tránh ảnh skin bị che khuất */
+        padding: 5% 20px 75%; /* Tăng padding trên để tránh ảnh skin bị che khuất */
     }
 
     .skins-container {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30%;
     }
 
     .skins-content {
         order: 0; 
         padding-left: 0;
-        text-align: center;
+        text-align: left;
         align-items: center;
         padding-bottom: 20%;
     }
+
     .skins-visual {
         order: 1;  
     }    
     .skins-content .main-title,
     .skins-content .sub-title,
     .skins-content .desc {
-        text-align: center;
+        text-align: left;
     }
 
     .skin-img {
         left: 50%; /* Căn giữa lại ảnh skin */
-        width: 100%;
+        width: 250%;
     }
     .btn-gold{
         width: 100%;
@@ -2249,12 +2372,12 @@
     }
 
     .mode-selector {
-        gap: 30%;
+        gap: 10%;
     }
 
     .mode-item img {
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
     }
 
     /* Vòng tròn video trên mobile */
@@ -2292,7 +2415,7 @@
     /* --- Mega Menu (Riot Bar) Fix --- */
     .riot-mega-menu-container {
         padding: 20px;
-        max-height: 90vh;
+        max-height: 100vh;
         overflow-y: auto;
     }
 
